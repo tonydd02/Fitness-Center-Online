@@ -1,3 +1,5 @@
+// useless comment to check commit
+
 //import Treadmill from '../components/Treadmill'
 import { connectToDatabase } from '../util/mongodb'
 import Link from 'next/link'
