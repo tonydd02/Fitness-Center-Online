@@ -10,7 +10,7 @@ function Treadmill({ treadmill, session }) {
   return (
     <div>
         <button className={treadmill.status===1 ? "treadmillFree" : "treadmillOccupied"}
-          onClick={() => fetch("https://gymTracker.zihaodong.repl.co/api/writeToDatabase", {
+          onClick={() => fetch("https://GroupProjectGYM.zihaodong.repl.co/api/writeToDatabase", {
             method: 'POST', 
             headers: {
               'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ function Treadmill({ treadmill, session }) {
         </button>
         <li>
         <button className="likeButton"
-          onClick={() => fetch("https://gymTracker.zihaodong.repl.co/api/writeToDatabase", {
+          onClick={() => fetch("https://GroupProjectGYM.zihaodong.repl.co/api/writeToDatabase", {
             method: 'POST', 
             headers: {
               'Content-Type': 'application/json',
