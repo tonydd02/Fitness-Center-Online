@@ -17,13 +17,31 @@ function Treadmill({ treadmill, session }) {
               name: treadmill.name,
               _id: treadmill._id,
               likedBy: treadmill.Liked_By,
-              action: treadmill.status === 1 ? "occupy" : "like",
+              action: "occupy",
               password: "n/a",
               nickname: session.user.name,
               }),
             })}>
-          <Link href="/">{treadmill.name}</Link>
+          <div>{treadmill.name}</div>
         </button>
+        <li>
+        <button className="likeButton"
+          onClick={() => fetch("https://gymTracker.zihaodong.repl.co/api/writeToDatabase", {
+            method: 'POST', 
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              name: treadmill.name,
+              _id: treadmill._id,
+              likedBy: treadmill.Liked_By,
+              action: "like",
+              password: "n/a",
+              nickname: session.user.name,
+              }),
+            })}> <div> Power Up ! </div> 
+        </button>
+        </li>
         <li className="treadInfo">Status: {treadmill.status===1?"free":"occupied"}</li>
         <li className="treadInfo">Powered Up By {treadmill.Liked_By} Users</li>
         <br />
@@ -53,6 +71,17 @@ function Treadmill({ treadmill, session }) {
         .treadInfo {
           margin-left: 20px;
           color: #0000ff;
+        }
+        .likeButton {
+          background: #00ff00;
+          width: 90px;
+          height: 30px;
+          margin-top: 5px;
+          margin-left: 5px;
+          margin-right: 5px;
+        }
+        .likeButton:hover {
+          background: #00cc00;
         }
       `}</style>
     </div>

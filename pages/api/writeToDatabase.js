@@ -24,7 +24,7 @@ async function handler (req, res) {
           const id = new ObjectId(body._id);
           await db.collection("Treadmills").updateOne(
             { _id: id },
-            { $set: { status: 0 } }
+            { $set: { status: 0} }
           )
           res.status(200).json({ message: "equipment occupied"})
           break;
