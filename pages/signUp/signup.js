@@ -42,7 +42,11 @@ export default function loginPage() {
               nickname: formData.user_nickname,
             }),
       }
-    ).then(Router.push("/"))
+    ).then(() => {
+              //window.alert("Successfully Signed Up! Please Go back and log in...")
+              console.log("loading...")
+              Router.push("https://GroupProjectGYM.zihaodong.repl.co")
+            })
   };
 
   return (
