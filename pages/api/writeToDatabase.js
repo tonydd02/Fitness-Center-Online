@@ -1,5 +1,6 @@
 import { connectToDatabase } from '../../util/mongodb'
 import { ObjectId } from "mongodb"
+import Router from 'next/router'
 
 async function handler (req, res) {
   //connect to MongoDB
@@ -28,7 +29,7 @@ async function handler (req, res) {
             { status: 1, 
               who_occupied:1,
             })
-          console.log("find the threadmill")
+          console.log("find the treadmill")
           console.log(JSON.stringify(treadmill))
           console.log(treadmill.status)
           if (treadmill.status === 1)
@@ -43,7 +44,7 @@ async function handler (req, res) {
               console.log("I am in branch that will unoccupy")
               await db.collection("Treadmills").updateOne(
               { _id: id },
-              { $set: { status: 1, who_occupied: ""}})
+              { $set: { status: 1, who_occupied: "", Liked_By: 0}})
             }
             else
             {
@@ -53,6 +54,7 @@ async function handler (req, res) {
             }
           }
           res.status(200).json({ message: "equipment occupied"})
+          // Router.push('/')
           break;
         case "like":
           const id2 = new ObjectId(body._id);
@@ -63,6 +65,7 @@ async function handler (req, res) {
             { $set: { Liked_By: like + 1}}
           )
           res.status(200).json({ message: 'Liked exercise!'})
+          // Router.push('/')
           break;
         case "signup":
           // try to find the user passed in

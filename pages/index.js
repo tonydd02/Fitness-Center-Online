@@ -5,14 +5,19 @@
 import { connectToDatabase } from '../util/mongodb'
 import Link from 'next/link'
 import { signIn, signOut, useSession, getSession } from 'next-auth/client'
-
+import Router from 'next/router'
+import { useRouter, withRouter } from 'next/router'
+//import Treadmill from '../components/Treadmill'
+// import { handler } from './api/writeToDatabase'
+ 
 /* pass in data from user and define the display structure of Treadmill*/
 function Treadmill({ treadmill, session }) {
   return (
 
     <div>
+
         <button className={treadmill.status===1 ? "treadmillFree" : "treadmillOccupied"}
-          onClick={() => fetch("https://GroupProjectGYM.zihaodong.repl.co/api/writeToDatabase", {
+          onClick={() => fetch ("https://GroupProjectGYM.zihaodong.repl.co/api/writeToDatabase", {
             method: 'POST', 
             headers: {
               'Content-Type': 'application/json',
@@ -25,10 +30,13 @@ function Treadmill({ treadmill, session }) {
               password: "n/a",
               nickname: session.user.name,
               }),
+            }).then(() => {
+              console.log("loading...")
+              Router.push(window.location.href)
             })}>
           <div>{treadmill.name}</div>
         </button>
-        <li>
+
         <button className="likeButton"
           onClick={() => fetch("https://GroupProjectGYM.zihaodong.repl.co/api/writeToDatabase", {
             method: 'POST', 
@@ -43,9 +51,12 @@ function Treadmill({ treadmill, session }) {
               password: "n/a",
               nickname: session.user.name,
               }),
+            }).then(() => {
+              console.log("loading...")
+              Router.push(window.location.href)
             })}> <div> Power Up ! </div> 
         </button>
-        </li>
+
         <li className="treadInfo">
         Status: {treadmill.status===1?
         "free":"occupied by ".concat(`${treadmill.who_occupied}`)}</li>
@@ -94,8 +105,10 @@ function Treadmill({ treadmill, session }) {
   )
 }
 
+
 /* Styling and formating the page */ 
 export default function equipments({ data }) {
+  // Router.push("https://GroupProjectGYM.zihaodong.repl.co")
   console.log(data)
   const [ session, loading ] = useSession()
   //console.log(session?"session":"not session")
@@ -197,7 +210,7 @@ export async function getServerSideProps(context){
     .toArray()
   
   // const data = collection.json()
-  console.log(data)
+  // console.log(data)
   // console.log(data)
   return {
     props: {
