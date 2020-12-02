@@ -2,6 +2,26 @@ import { connectToDatabase } from '../../util/mongodb'
 import { ObjectId } from "mongodb"
 import Router from 'next/router'
 
+/*helper function to calculate a user's total exercise time on a treadmill*/
+  function diff (start, end) {
+    
+    var start_date = new Date(JSON.stringify(start));
+    console.log(`start_date: ${start_date}`)
+    var end_date = new Date(JSON.stringify(end));
+    console.log(`end_date: ${end_date}`)
+    var diff = end_date.getTime() - start_date.getTime();
+    console.log(`diff: ${diff}`)
+    return diff;
+    // var diff_h = Math.floor(diff / 1000 / 60 / 60);
+    // diff -= diff_h * 1000 * 60 * 60;
+    // var diff_m = Math.floor(diff / 1000 / 60);
+    // diff -= diff_m * 1000 * 60;
+    // var diff_s = Math.floor(diff / 1000);
+    // var diff_ms = diff - diff_s * 1000;
+
+    // return (diff_h <= 9 ? "0":"") + diff_h + ":" + (diff_m <= 9 ? "0":"") + diff_m + ":" + (diff_s <= 9 ? "0":"") + diff_s + ":" + (diff_ms <= 9 ? "0":"") + diff_ms;
+  }
+
 async function handler (req, res) {
   //connect to MongoDB
   const { db } = await connectToDatabase()
@@ -27,30 +47,45 @@ async function handler (req, res) {
           const treadmill = await db.collection("Treadmills").findOne(
             {_id : id}, 
             { status: 1, 
-              who_occupied:1,
+              who_occupied: 1,
+              start_time: 1,
             })
           console.log("find the treadmill")
           console.log(JSON.stringify(treadmill))
           console.log(treadmill.status)
           if (treadmill.status === 1)
-          {console.log("I am in branch that will occupy")
-          await db.collection("Treadmills").updateOne(
-            { _id: id },
-            { $set: { status: 0, who_occupied: nickname} }
-          )}
+            { console.log("I am in branch that will occupy")
+              const start = new Date()
+              console.log(JSON.stringify(start))
+              await db.collection("Treadmills").updateOne(
+                { _id: id },
+                { $set: { status: 0, who_occupied: nickname, start_time: JSON.stringify(start)} })
+            }
           else{ 
             if (treadmill.who_occupied === nickname)
             {
               console.log("I am in branch that will unoccupy")
+              const end = new Date()
+              console.log(JSON.stringify(end))
               await db.collection("Treadmills").updateOne(
-              { _id: id },
-              { $set: { status: 1, who_occupied: "", Liked_By: 0}})
+                { _id: id },
+                { $set: { status: 1, who_occupied: "", Liked_By: 0, end_time: JSON.stringify(end)}})
+              //console.log(treadmill.duration)
+              const user = await db.collection("User").findOne(
+                { nickname: nickname },
+                { totalTime: 1, }
+              )
+              await db.collection("User").updateOne(
+                { nickname: nickname },
+                { $set: {totalTime: user.totalTime + diff(treadmill.start_time, JSON.stringify(end))} }
+              )
             }
+
             else
             {
               console.log("I am in branch that will alert")
               // the alert still does not work, try something else later
-              window.alert("This machine has already been occupied by others");
+              // window.alert("This machine has already been occupied by others");
             }
           }
           res.status(200).json({ message: "equipment occupied"})
@@ -83,6 +118,7 @@ async function handler (req, res) {
                 username: name,
                 password: password,
                 nickname: nickname,
+                totalTime: 0,
               }
             ) 
             console.log(`Congrats! You have successfully Signed Up!\n \
@@ -111,7 +147,8 @@ async function handler (req, res) {
       
       break;
   }
-  
 }
+
+
 
 export default handler;
