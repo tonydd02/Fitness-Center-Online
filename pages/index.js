@@ -29,6 +29,9 @@ function Treadmill({ treadmill, session }) {
               action: "occupy",
               password: "n/a",
               nickname: session.user.name,
+              // start_time: new Date(),
+              // end_time: new Date(),
+              //duration: "n/a",
               }),
             }).then(() => {
               console.log("loading...")
@@ -50,7 +53,10 @@ function Treadmill({ treadmill, session }) {
               action: "like",
               password: "n/a",
               nickname: session.user.name,
-              }),
+              // start_time: new Date(),
+              // end_time: new Date(),
+              // duration: "n/a",
+            }),
             }).then(() => {
               console.log("loading...")
               Router.push(window.location.href)

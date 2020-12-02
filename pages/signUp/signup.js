@@ -27,7 +27,7 @@ export default function loginPage() {
     console.log(formData.usr_email);
     // ... submit to API or something
     fetch(
-      "https://gymTracker.zihaodong.repl.co/api/writeToDatabase", 
+      "https://GroupProjectGYM.zihaodong.repl.co/api/writeToDatabase", 
       {
             method: 'POST', 
             headers: {
