@@ -1,6 +1,7 @@
-// useless comment to check commit
 
 //import Treadmill from '../components/Treadmill'
+
+//This is test for commit using replit
 import { connectToDatabase } from '../util/mongodb'
 import Link from 'next/link'
 import { signIn, signOut, useSession, getSession } from 'next-auth/client'
