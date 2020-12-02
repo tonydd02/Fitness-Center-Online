@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Router from 'next/router'
 import { useState } from 'react'
 
 
@@ -41,7 +42,7 @@ export default function loginPage() {
               nickname: formData.user_nickname,
             }),
       }
-    )
+    ).then(Router.push("/"))
   };
 
   return (
