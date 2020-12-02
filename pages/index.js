@@ -1,5 +1,3 @@
-// this is useless comment to test commit
-// this is another useless comment to test commit
 
 //import Treadmill from '../components/Treadmill'
 
@@ -11,9 +9,10 @@ import { signIn, signOut, useSession, getSession } from 'next-auth/client'
 /* pass in data from user and define the display structure of Treadmill*/
 function Treadmill({ treadmill, session }) {
   return (
+
     <div>
         <button className={treadmill.status===1 ? "treadmillFree" : "treadmillOccupied"}
-          onClick={() => fetch("https://gymTracker.zihaodong.repl.co/api/writeToDatabase", {
+          onClick={() => fetch("https://GroupProjectGYM.zihaodong.repl.co/api/writeToDatabase", {
             method: 'POST', 
             headers: {
               'Content-Type': 'application/json',
@@ -31,7 +30,7 @@ function Treadmill({ treadmill, session }) {
         </button>
         <li>
         <button className="likeButton"
-          onClick={() => fetch("https://gymTracker.zihaodong.repl.co/api/writeToDatabase", {
+          onClick={() => fetch("https://GroupProjectGYM.zihaodong.repl.co/api/writeToDatabase", {
             method: 'POST', 
             headers: {
               'Content-Type': 'application/json',
@@ -47,7 +46,9 @@ function Treadmill({ treadmill, session }) {
             })}> <div> Power Up ! </div> 
         </button>
         </li>
-        <li className="treadInfo">Status: {treadmill.status===1?"free":"occupied"}</li>
+        <li className="treadInfo">
+        Status: {treadmill.status===1?
+        "free":"occupied by ".concat(`${treadmill.who_occupied}`)}</li>
         <li className="treadInfo">Powered Up By {treadmill.Liked_By} Users</li>
         <br />
       <style jsx>{`
