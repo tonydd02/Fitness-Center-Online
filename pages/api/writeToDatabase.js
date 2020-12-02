@@ -22,15 +22,41 @@ async function handler (req, res) {
         //occupy a treadmill
         case "occupy":
           const id = new ObjectId(body._id);
+          console.log(id)
+          const treadmill = await db.collection("Treadmills").findOne(
+            {_id : id}, 
+            { status: 1, 
+              who_occupied:1,
+            })
+          console.log("find the threadmill")
+          console.log(JSON.stringify(treadmill))
+          console.log(treadmill.status)
+          if (treadmill.status === 1)
+          {console.log("I am in branch that will occupy")
           await db.collection("Treadmills").updateOne(
             { _id: id },
-            { $set: { status: 0} }
-          )
+            { $set: { status: 0, who_occupied: nickname} }
+          )}
+          else{ 
+            if (treadmill.who_occupied === nickname)
+            {
+              console.log("I am in branch that will unoccupy")
+              await db.collection("Treadmills").updateOne(
+              { _id: id },
+              { $set: { status: 1, who_occupied: ""}})
+            }
+            else
+            {
+              console.log("I am in branch that will alert")
+              // the alert still does not work, try something else later
+              window.alert("This machine has already been occupied by others");
+            }
+          }
           res.status(200).json({ message: "equipment occupied"})
           break;
         case "like":
           const id2 = new ObjectId(body._id);
-          console.log(like)
+          //console.log(like)
           //like other's exercise on this treadmill
           await db.collection("Treadmills").updateOne(
             { _id: id2 },

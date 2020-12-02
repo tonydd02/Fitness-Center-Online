@@ -8,6 +8,7 @@ import { signIn, signOut, useSession, getSession } from 'next-auth/client'
 /* pass in data from user and define the display structure of Treadmill*/
 function Treadmill({ treadmill, session }) {
   return (
+
     <div>
         <button className={treadmill.status===1 ? "treadmillFree" : "treadmillOccupied"}
           onClick={() => fetch("https://GroupProjectGYM.zihaodong.repl.co/api/writeToDatabase", {
@@ -44,7 +45,9 @@ function Treadmill({ treadmill, session }) {
             })}> <div> Power Up ! </div> 
         </button>
         </li>
-        <li className="treadInfo">Status: {treadmill.status===1?"free":"occupied"}</li>
+        <li className="treadInfo">
+        Status: {treadmill.status===1?
+        "free":"occupied by ".concat(`${treadmill.who_occupied}`)}</li>
         <li className="treadInfo">Powered Up By {treadmill.Liked_By} Users</li>
         <br />
       <style jsx>{`
