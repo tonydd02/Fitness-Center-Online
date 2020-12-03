@@ -127,6 +127,9 @@ export default function equipments({ data }) {
       <h1>
         <div className="UCLA">UCLA</div>
         <div className="Title"> Treadmills At JWC</div>
+        <button className="searchButton">
+          <Link href="./search"> Search </Link>
+        </button>
         <button className="loginButton" onClick={signOut}>
           sign out
         </button>
@@ -154,6 +157,17 @@ export default function equipments({ data }) {
           height: 35px;
         }
         .loginButton:hover {
+          background: #3399ff;
+        }
+        .searchButton {
+          background: #ffff00;
+          position: absolute;
+          top: 25px;
+          right: 110px;
+          width: 80px;
+          height: 35px;
+        }
+        .searchButton:hover {
           background: #3399ff;
         }
         Link {
