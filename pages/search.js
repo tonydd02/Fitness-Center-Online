@@ -128,14 +128,17 @@
 //     </Formik>
 //   );
 // }
+
+
+/////////////////////////////////////////////////////////
+
+
+/*
 import { Button, FormControl, Grid, InputLabel, makeStyles, MenuItem, Paper, Select, SelectProps } from '@material-ui/core';
 import { Field, Form, Formik, useField, useFormikContext } from 'formik';
 import FormHelperText from '@material-ui/core/FormHelperText';
-// function HomePage() {
-//   return <div>Welcome to Next.js!</div>
-// }
 
-// export default HomePage
+
 
 var day=0;
 var time=0;
@@ -154,6 +157,12 @@ async function handleClick(){
   }
   else{
     alert("Searching for occupancy on "+day+" "+time);
+*/
+
+
+
+
+
     // const item= db.collection("History").findOne(
     //   {"Day":day,"Time":time},
     //   {"Usage":1}
@@ -165,9 +174,11 @@ async function handleClick(){
     // else{
     //   alert("Sorry, equipment usage on this day is unavailable");
     // }
-  }
-}
 
+//////
+//  }
+//}
+///////
 // function handleClick(){
 //   const result= db.collection("History").findOne(
 //     {Day:day,Time:time},
@@ -176,7 +187,8 @@ async function handleClick(){
 // }
   
   
-
+////////////////////////////////////////////////////////
+/*
 const handleSelectDay = (event) => {
     day=event.target.value;
     console.log(day);
@@ -252,3 +264,10 @@ export default function Home(){
     </Formik>
   );
 }
+*/
+
+function HomePage() {
+  return <div>Welcome to Next.js!</div>
+}
+
+export default HomePage
