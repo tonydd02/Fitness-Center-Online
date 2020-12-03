@@ -66,7 +66,9 @@ function Treadmill({ treadmill, session }) {
         <li className="treadInfo">
         Status: {treadmill.status===1?
         "free":"occupied by ".concat(`${treadmill.who_occupied}`)}</li>
-        <li className="treadInfo">Powered Up By {treadmill.Liked_By} Users</li>
+        <li className="treadInfo">
+        {treadmill.Liked_By.length===0 ? "No one has liked yet!"
+        : "Powered Up By ".concat(`${treadmill.Liked_By.join(", ")}`)}</li>
         <br />
       <style jsx>{`
         .treadmillFree {
