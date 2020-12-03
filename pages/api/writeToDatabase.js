@@ -53,31 +53,34 @@ async function handler (req, res) {
               end_time: 1,
               totalTime: 1,
             })
-          console.log("find the treadmill")
-          console.log(JSON.stringify(treadmill))
-          console.log(treadmill.status)
-          if (treadmill.status === 1)
+          const user_occupy = await db.collection("User").findOne(
+            { nickname: nickname },
+            { start_time: 1 },
+            { has_occupied: 1})
+          //console.log("find the treadmill")
+          //console.log(JSON.stringify(treadmill))
+          //console.log(treadmill.status)
+          if (treadmill.status === 1 && user_occupy.has_occupied === 0)
             { console.log("I am in branch that will occupy")
               const start = new Date()
-              console.log(JSON.stringify(start))
+              //console.log(JSON.stringify(start))
               await db.collection("Treadmills").updateOne(
                 { _id: id },
                 { $set: { status: 0, who_occupied: nickname}})
-
               const user = await db.collection("User").findOne(
-                { nickname: nickname },
-                { start_time: 1 },)
+              { nickname: nickname },
+              { start_time: 1 })
               await db.collection("User").updateOne(
                 { nickname: nickname },
-                { $set: { start_time : start}},
+                { $set: { start_time : start, has_occupied: 1}},
                 console.log(`start time: ${user.start_time}`))
             }
           else{ 
-            if (treadmill.who_occupied === nickname)
+            if (treadmill.who_occupied === nickname && user_occupy.has_occupied === 1)
             {
               console.log("I am in branch that will unoccupy")
               const end = new Date()
-              console.log(JSON.stringify(end))
+              //console.log(JSON.stringify(end))
               await db.collection("Treadmills").updateOne(
                 { _id: id },
                 { $set: { status: 1, who_occupied: "", Liked_By: 0}})
@@ -92,20 +95,23 @@ async function handler (req, res) {
                 { $set: 
                     {totalTime: user.totalTime + diff(user.start_time, end), 
                     start_time: new Date(),
-                    end_time: new Date()}},
-                console.log(`total time: ${user.totalTime}`),
-                console.log(`start time: ${user.start_time}`),
-                console.log(`end time: ${user.end_time}`)
+                    end_time: new Date(),
+                    has_occupied: 0}},
+                //console.log(`total time: ${user.totalTime}`),
+                //console.log(`start time: ${user.start_time}`),
+                //console.log(`end time: ${user.end_time}`)
               )
             }
-
             else
             {
+              //res.statusMessage = "This machine has already been occupied by others";
+              //res.status(317).end()
               console.log("I am in branch that will alert")
               // the alert still does not work, try something else later
               // window.alert("This machine has already been occupied by others");
             }
           }
+          //console.log("I exited the branch and return 200")
           res.status(200).json({ message: "equipment occupied"})
           // Router.push('/')
           break;
