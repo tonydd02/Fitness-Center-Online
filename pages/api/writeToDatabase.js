@@ -118,10 +118,24 @@ async function handler (req, res) {
         case "like":
           const id2 = new ObjectId(body._id);
           //console.log(like)
-          //like other's exercise on this treadmill
+          //like other's exercise on this treadmill、
+          const treadmill_like = await db.collection("Treadmills").findOne(
+            {_id : id2}, 
+            { Liked_By:1})
+          let index = treadmill_like.Liked_By.indexOf(nickname)
+          console.log(index)
+          if( index === -1)
+          { //console.log("like")
+            treadmill_like.Liked_By.push(nickname)}
+          else{
+            //cancel like
+            //console.log("cancel like")
+            treadmill_like.Liked_By.splice(index, 1)
+          }
+          //console.log(treadmill_like.Liked_By)
           await db.collection("Treadmills").updateOne(
             { _id: id2 },
-            { $set: { Liked_By: like + 1}}
+            { $set: { Liked_By: treadmill_like.Liked_By}}
           )
           res.status(200).json({ message: 'Liked exercise!'})
           // Router.push('/')
