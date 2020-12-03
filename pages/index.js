@@ -31,7 +31,7 @@ function Treadmill({ treadmill, session }) {
               nickname: session.user.name,
               // start_time: new Date(),
               // end_time: new Date(),
-              //duration: "n/a",
+              // totalTime: 0,
               }),
             }).then(() => {
               console.log("loading...")
@@ -55,7 +55,7 @@ function Treadmill({ treadmill, session }) {
               nickname: session.user.name,
               // start_time: new Date(),
               // end_time: new Date(),
-              // duration: "n/a",
+              // totalTime: "n/a",
             }),
             }).then(() => {
               console.log("loading...")
