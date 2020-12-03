@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -114,8 +114,131 @@ __webpack_require__.r(__webpack_exports__);
 var _jsxFileName = "/home/runner/GroupProjectGYM/pages/search.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+// import { Button, FormControl, Grid, InputLabel, makeStyles, MenuItem, Paper, Select, SelectProps } from '@material-ui/core';
+// import { Field, Form, Formik, useField, useFormikContext } from 'formik';
+// import FormHelperText from '@material-ui/core/FormHelperText';
+// 
+// // function HomePage() {
+// //   return <div>Welcome to Next.js!</div>
+// // }
+// // export default HomePage
+// var day=0;
+// var time=0;
+// const useStyles = makeStyles((theme) => ({
+//   paper: {
+//     margin: "auto",
+//     maxWidth: 400,
+//     padding: theme.spacing(3)
+//   }
+// }));
+// // async function handleClick() {
+// //     alert("Searching for occupancy");
+// // }
+// export async function handleClick(){
+//   if(day==0||time==0){
+//     alert("Please select both day and time")
+//   }
+//   else{
+//     // alert("Searching for occupancy on "+day+" "+time);
+//     const{ db }=await connectToDatabase();
+//     const {item}= await db.collection("History").findOne(
+//       {"Day":day,"Time":time},
+//       {"Usage":1}
+//     );
+//     if(result!=null){
+//       const result=item.Usage;
+//       alert("The usage on this day is: "+result);
+//     }
+//     else{
+//       alert("Sorry, equipment usage on this day is unavailable");
+//     }
+//   }
+// }
+// // function handleClick(){
+// //   const result= db.collection("History").findOne(
+// //     {Day:day,Time:time},
+// //     {Usage:1}
+// //   );
+// // }
+// const handleSelectDay = (event) => {
+//     day=event.target.value;
+//     console.log(day);
+//     //console.log(event.target.value); 
+// }
+// const handleSelectTime = (event) => {
+//     time=event.target.value;
+//     console.log(time);
+//     //console.log(event.target.value); 
+// }
+// export default function Home(){
+//   const classes=useStyles();
+//   return (
+//     <Formik initialValues={{}} onSubmit={()=>{}}>
+//       {({values})=>(
+//         <Form>
+//           <Paper elevation={5} className={classes.paper}>
+//             <Grid container spacing = {3}>
+//               <Grid item xs={12} sm={6}>
+//                 <FormControl fullWidth variant="outlined">
+//                   <InputLabel id="search-day">Day</InputLabel>
+//                   <Select
+//                     labelId="search-day"
+//                     label="Day"
+//                     onChange={handleSelectDay}
+//                   >
+//                     <MenuItem value="">
+//                       <em>None</em>
+//                     </MenuItem>
+//                     <MenuItem value={"Sunday"}>Sunday</MenuItem>
+//                     <MenuItem value={"Monday"}>Monday</MenuItem>
+//                     <MenuItem value={"Tuesday"}>Tuesday</MenuItem>
+//                     <MenuItem value={"Wednesday"}>Wednesday</MenuItem>
+//                     <MenuItem value={"Thursday"}>Thursday</MenuItem>
+//                     <MenuItem value={"Friday"}>Friday</MenuItem>
+//                     <MenuItem value={"Saturday"}>Saturday</MenuItem>
+//                   </Select>
+//                 </FormControl>
+//               </Grid>
+//               <Grid item xs={12} sm={6}>
+//                 <FormControl fullWidth variant="outlined">
+//                   <InputLabel id="search-time">Time</InputLabel>
+//                   <Select
+//                     labelId="search-time"
+//                     label="Time"
+//                     onChange={handleSelectTime}
+//                   >
+//                     <MenuItem value="">
+//                       <em>None</em>
+//                     </MenuItem>
+//                     <MenuItem value={"8-10"}>8am-10am</MenuItem>
+//                     <MenuItem value={"10-12"}>10am-12pm</MenuItem>
+//                     <MenuItem value={"12-2"}>12pm-2pm</MenuItem>
+//                     <MenuItem value={"14-4"}>2pm-4pm</MenuItem>
+//                     <MenuItem value={"16-18"}>4pm-6pm</MenuItem>
+//                     <MenuItem value={"18-20"}>6pm-8pm</MenuItem>
+//                     <MenuItem value={"20-22"}>8pm-10pm</MenuItem>
+//                   </Select>
+//                 </FormControl>
+//               </Grid>
+//               <Grid item xs={12}>
+//                 <Button type="submit" variant="contained" 
+//                   color="primary" fullWidth id="Search" 
+//                   onClick={()=>handleClick()}
+//                   >Search for Occupancy</Button>
+//               </Grid>
+//             </Grid>
+//           </Paper>
+//         </Form>
+//       )}
+//     </Formik>
+//   );
+// }
 
 
+ // function HomePage() {
+//   return <div>Welcome to Next.js!</div>
+// }
+// export default HomePage
 
 var day = 0;
 var time = 0;
@@ -127,9 +250,29 @@ const useStyles = Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["makeSty
   }
 }));
 
-function handleClick() {
-  alert("The Occupancy is 80%");
-}
+async function handleClick() {
+  if (day == 0 || time == 0) {
+    alert("Please select both day and time");
+  } else {
+    alert("Searching for occupancy on " + day + " " + time); // const item= db.collection("History").findOne(
+    //   {"Day":day,"Time":time},
+    //   {"Usage":1}
+    // );
+    // if(result!=null){
+    //   const result=item.Usage;
+    //   alert("The usage on this day is: "+result);
+    // }
+    // else{
+    //   alert("Sorry, equipment usage on this day is unavailable");
+    // }
+  }
+} // function handleClick(){
+//   const result= db.collection("History").findOne(
+//     {Day:day,Time:time},
+//     {Usage:1}
+//   );
+// }
+
 
 const handleSelectDay = event => {
   day = event.target.value;
@@ -149,7 +292,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36,
+      lineNumber: 195,
       columnNumber: 5
     }
   }, ({
@@ -158,7 +301,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38,
+      lineNumber: 197,
       columnNumber: 9
     }
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Paper"], {
@@ -167,7 +310,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39,
+      lineNumber: 198,
       columnNumber: 11
     }
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
@@ -176,7 +319,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40,
+      lineNumber: 199,
       columnNumber: 13
     }
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
@@ -186,7 +329,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41,
+      lineNumber: 200,
       columnNumber: 15
     }
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["FormControl"], {
@@ -195,7 +338,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42,
+      lineNumber: 201,
       columnNumber: 17
     }
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["InputLabel"], {
@@ -203,7 +346,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43,
+      lineNumber: 202,
       columnNumber: 19
     }
   }, "Day"), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Select"], {
@@ -213,7 +356,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44,
+      lineNumber: 203,
       columnNumber: 19
     }
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
@@ -221,70 +364,70 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49,
+      lineNumber: 208,
       columnNumber: 21
     }
   }, __jsx("em", {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50,
+      lineNumber: 209,
       columnNumber: 23
     }
   }, "None")), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
-    value: 7,
+    value: "Sunday",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52,
+      lineNumber: 211,
       columnNumber: 21
     }
   }, "Sunday"), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
-    value: 1,
+    value: "Monday",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53,
+      lineNumber: 212,
       columnNumber: 21
     }
   }, "Monday"), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
-    value: 2,
+    value: "Tuesday",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54,
+      lineNumber: 213,
       columnNumber: 21
     }
   }, "Tuesday"), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
-    value: 3,
+    value: "Wednesday",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55,
+      lineNumber: 214,
       columnNumber: 21
     }
   }, "Wednesday"), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
-    value: 4,
+    value: "Thursday",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56,
+      lineNumber: 215,
       columnNumber: 21
     }
   }, "Thursday"), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
-    value: 5,
+    value: "Friday",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57,
+      lineNumber: 216,
       columnNumber: 21
     }
   }, "Friday"), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
-    value: 6,
+    value: "Saturday",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58,
+      lineNumber: 217,
       columnNumber: 21
     }
   }, "Saturday")))), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
@@ -294,7 +437,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62,
+      lineNumber: 221,
       columnNumber: 15
     }
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["FormControl"], {
@@ -303,7 +446,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63,
+      lineNumber: 222,
       columnNumber: 17
     }
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["InputLabel"], {
@@ -311,7 +454,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64,
+      lineNumber: 223,
       columnNumber: 19
     }
   }, "Time"), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Select"], {
@@ -321,7 +464,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65,
+      lineNumber: 224,
       columnNumber: 19
     }
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
@@ -329,14 +472,14 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 70,
+      lineNumber: 229,
       columnNumber: 21
     }
   }, __jsx("em", {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 71,
+      lineNumber: 230,
       columnNumber: 23
     }
   }, "None")), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
@@ -344,7 +487,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 73,
+      lineNumber: 232,
       columnNumber: 21
     }
   }, "8am-10am"), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
@@ -352,7 +495,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74,
+      lineNumber: 233,
       columnNumber: 21
     }
   }, "10am-12pm"), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
@@ -360,7 +503,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75,
+      lineNumber: 234,
       columnNumber: 21
     }
   }, "12pm-2pm"), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
@@ -368,7 +511,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76,
+      lineNumber: 235,
       columnNumber: 21
     }
   }, "2pm-4pm"), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
@@ -376,7 +519,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 77,
+      lineNumber: 236,
       columnNumber: 21
     }
   }, "4pm-6pm"), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
@@ -384,7 +527,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 78,
+      lineNumber: 237,
       columnNumber: 21
     }
   }, "6pm-8pm"), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
@@ -392,7 +535,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 79,
+      lineNumber: 238,
       columnNumber: 21
     }
   }, "8pm-10pm")))), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
@@ -401,7 +544,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83,
+      lineNumber: 242,
       columnNumber: 15
     }
   }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
@@ -414,7 +557,7 @@ function Home() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84,
+      lineNumber: 243,
       columnNumber: 17
     }
   }, "Search for Occupancy"))))));
@@ -422,7 +565,7 @@ function Home() {
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /*!*******************************!*\
   !*** multi ./pages/search.js ***!
   \*******************************/
