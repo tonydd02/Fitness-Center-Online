@@ -4,12 +4,13 @@ import Router from 'next/router'
 
 /*helper function to calculate a user's total exercise time on a treadmill*/
   function diff (start, end) {
-    
-    var start_date = new Date(JSON.stringify(start));
-    console.log(`start_date: ${start_date}`)
-    var end_date = new Date(JSON.stringify(end));
-    console.log(`end_date: ${end_date}`)
-    var diff = end_date.getTime() - start_date.getTime();
+    // var start_date = new Date(JSON.stringify(start));
+    // console.log(`start_date: ${start_date}`)
+    // var end_date = new Date(JSON.stringify(end));
+    // console.log(`end_date: ${end_date}`)
+    console.log(`start_date: ${start}`)
+    console.log(`end_date: ${end}`)
+    var diff = end.getTime() - start.getTime();
     console.log(`diff: ${diff}`)
     return diff;
     // var diff_h = Math.floor(diff / 1000 / 60 / 60);
@@ -49,6 +50,8 @@ async function handler (req, res) {
             { status: 1, 
               who_occupied: 1,
               start_time: 1,
+              end_time: 1,
+              totalTime: 1,
             })
           console.log("find the treadmill")
           console.log(JSON.stringify(treadmill))
@@ -59,7 +62,15 @@ async function handler (req, res) {
               console.log(JSON.stringify(start))
               await db.collection("Treadmills").updateOne(
                 { _id: id },
-                { $set: { status: 0, who_occupied: nickname, start_time: JSON.stringify(start)} })
+                { $set: { status: 0, who_occupied: nickname}})
+
+              const user = await db.collection("User").findOne(
+                { nickname: nickname },
+                { start_time: 1 },)
+              await db.collection("User").updateOne(
+                { nickname: nickname },
+                { $set: { start_time : start}},
+                console.log(`start time: ${user.start_time}`))
             }
           else{ 
             if (treadmill.who_occupied === nickname)
@@ -69,15 +80,22 @@ async function handler (req, res) {
               console.log(JSON.stringify(end))
               await db.collection("Treadmills").updateOne(
                 { _id: id },
-                { $set: { status: 1, who_occupied: "", Liked_By: 0, end_time: JSON.stringify(end)}})
-              //console.log(treadmill.duration)
+                { $set: { status: 1, who_occupied: "", Liked_By: 0}})
+
               const user = await db.collection("User").findOne(
                 { nickname: nickname },
-                { totalTime: 1, }
-              )
+                { totalTime: 1 },
+                { start_time: 1},
+                { end_time: 1} )
               await db.collection("User").updateOne(
                 { nickname: nickname },
-                { $set: {totalTime: user.totalTime + diff(treadmill.start_time, JSON.stringify(end))} }
+                { $set: 
+                    {totalTime: user.totalTime + diff(user.start_time, end), 
+                    start_time: new Date(),
+                    end_time: new Date()}},
+                console.log(`total time: ${user.totalTime}`),
+                console.log(`start time: ${user.start_time}`),
+                console.log(`end time: ${user.end_time}`)
               )
             }
 
@@ -118,6 +136,8 @@ async function handler (req, res) {
                 username: name,
                 password: password,
                 nickname: nickname,
+                start_time: new Date(),
+                end_time: new Date(),
                 totalTime: 0,
               }
             ) 
