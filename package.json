@@ -1,21 +1,17 @@
 {
-  "name": "FortunateTallCodec",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "group_project",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "next",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "formik": "^2.2.5",
     "mongodb": "^3.6.3",
-    "next": "^9.5.5",
+    "next": "10.0.3",
     "next-auth": "^3.1.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"

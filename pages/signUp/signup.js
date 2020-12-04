@@ -27,7 +27,7 @@ export default function loginPage() {
     console.log(formData.usr_email);
     // ... submit to API or something
     fetch(
-      "https://GroupProjectGYM.zihaodong.repl.co/api/writeToDatabase", 
+      "http://localhost:3000/api/writeToDatabase", 
       {
             method: 'POST', 
             headers: {
@@ -45,7 +45,7 @@ export default function loginPage() {
     ).then(() => {
               //window.alert("Successfully Signed Up! Please Go back and log in...")
               console.log("loading...")
-              Router.push("https://GroupProjectGYM.zihaodong.repl.co")
+              Router.push("http://localhost:3000")
             })
   };
 
