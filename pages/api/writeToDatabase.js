@@ -55,8 +55,8 @@ async function handler (req, res) {
             })
           const user_occupy = await db.collection("User").findOne(
             { nickname: nickname },
-            { start_time: 1 },
-            { has_occupied: 1})
+            { start_time: 1 ,
+             has_occupied: 1})
           //console.log("find the treadmill")
           //console.log(JSON.stringify(treadmill))
           //console.log(treadmill.status)
@@ -83,13 +83,13 @@ async function handler (req, res) {
               //console.log(JSON.stringify(end))
               await db.collection("Treadmills").updateOne(
                 { _id: id },
-                { $set: { status: 1, who_occupied: "", Liked_By: 0}})
+                { $set: { status: 1, who_occupied: "", Liked_By: []}})
 
               const user = await db.collection("User").findOne(
                 { nickname: nickname },
-                { totalTime: 1 },
-                { start_time: 1},
-                { end_time: 1} )
+                { totalTime: 1 ,
+                 start_time: 1,
+                 end_time: 1} )
               await db.collection("User").updateOne(
                 { nickname: nickname },
                 { $set: 
