@@ -17,7 +17,7 @@ function Treadmill({ treadmill, session }) {
     <div>
 
         <button className={treadmill.status===1 ? "treadmillFree" : "treadmillOccupied"}
-          onClick={() => fetch ("https://GroupProjectGYM.zihaodong.repl.co/api/writeToDatabase", {
+          onClick={() => fetch ("http://localhost:3000/api/writeToDatabase", {
             method: 'POST', 
             headers: {
               'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ function Treadmill({ treadmill, session }) {
         </button>
 
         <button className="likeButton"
-          onClick={() => fetch("https://GroupProjectGYM.zihaodong.repl.co/api/writeToDatabase", {
+          onClick={() => fetch("http://localhost:3000/api/writeToDatabase", {
             method: 'POST', 
             headers: {
               'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ function Treadmill({ treadmill, session }) {
         "free":"occupied by ".concat(`${treadmill.who_occupied}`)}</li>
         <li className="treadInfo">
         {treadmill.Liked_By.length===0 ? "No one has liked yet!"
-        : "Powered Up By ".concat(`${treadmill.Liked_By.join(", ")}`)}</li>
+        : "Powered Up By ".concat(`${treadmill.Liked_By.join(', ')}`)}</li>
         <br />
       <style jsx>{`
         .treadmillFree {
