@@ -108,7 +108,7 @@ export default function Home(){
                     </MenuItem>
                     <MenuItem value={"8-10"}>8am-10am</MenuItem>
                     <MenuItem value={"10-12"}>10am-12pm</MenuItem>
-                    <MenuItem value={"12-2"}>12pm-2pm</MenuItem>
+                    <MenuItem value={"12-14"}>12pm-2pm</MenuItem>
                     <MenuItem value={"14-16"}>2pm-4pm</MenuItem>
                     <MenuItem value={"16-18"}>4pm-6pm</MenuItem>
                     <MenuItem value={"18-20"}>6pm-8pm</MenuItem>
