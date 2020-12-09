@@ -78,6 +78,9 @@ function Treadmill({ treadmill, session }) {
           margin-top: 5px;
           margin-left: 5px;
           margin-right: 5px;
+          border-style: outset;
+          border-width: 2px;
+          border-color: #0080ff;
         }
         .treadmillFree:hover {
           background: #3399ff;
@@ -89,6 +92,9 @@ function Treadmill({ treadmill, session }) {
           margin-top: 5px;
           margin-left: 5px;
           margin-right: 5px;
+          order-style: outset;
+          border-width: 2px;
+          border-color: #ffff00;
         }
         .treadmillOccupied:hover {
           background: #ffff00;
@@ -129,6 +135,9 @@ export default function equipments({ data }) {
       <h1>
         <div className="UCLA">UCLA</div>
         <div className="Title"> Treadmills At JWC</div>
+        <button className="rankingButton">
+          <Link href="./rank"> Rank </Link>
+        </button>
         <button className="searchButton">
           <Link href="./search"> Search </Link>
         </button>
@@ -136,7 +145,8 @@ export default function equipments({ data }) {
           sign out
         </button>
       </h1>
-      <div> logged in as {session.user.name} </div>
+      <div> Welcome, {session.user.name} </div>
+      <br />
       <div>
         {data.map((treadmill) => (
           <Treadmill key={treadmill._id} treadmill={treadmill} session= {session}/>
@@ -170,6 +180,17 @@ export default function equipments({ data }) {
           height: 35px;
         }
         .searchButton:hover {
+          background: #3399ff;
+        }
+        .rankingButton {
+          background: #ffff00;
+          position: absolute;
+          top: 25px;
+          right: 195px;
+          width: 80px;
+          height: 35px;
+        }
+        .rankingButton:hover {
           background: #3399ff;
         }
         Link {
