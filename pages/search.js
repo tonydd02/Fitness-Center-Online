@@ -1,6 +1,7 @@
 import { Button, FormControl, Grid, InputLabel, makeStyles, MenuItem, Paper, Select, SelectProps } from '@material-ui/core';
 import { Field, Form, Formik, useField, useFormikContext } from 'formik';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import Link from 'next/link'
 
 
 
@@ -12,6 +13,11 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     maxWidth: 400,
     padding: theme.spacing(3)
+  },
+  home_button:{
+    position: "absolute",
+	left: "90%",
+	top: "2%"
   }
 }));
 
@@ -69,81 +75,90 @@ const handleSelectTime = (event) => {
 export default function Home(){
   const classes=useStyles();
   return (
-    <Formik initialValues={{}} onSubmit={()=>{}}>
-      {({values})=>(
-        <Form>
-          <Paper elevation={5} className={classes.paper}>
-            <Grid container spacing = {3}>
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth variant="outlined">
-                  <InputLabel id="search-day">Day</InputLabel>
-                  <Select
-                    labelId="search-day"
-                    label="Day"
-                    onChange={handleSelectDay}
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={"Sunday"}>Sunday</MenuItem>
-                    <MenuItem value={"Monday"}>Monday</MenuItem>
-                    <MenuItem value={"Tuesday"}>Tuesday</MenuItem>
-                    <MenuItem value={"Wednesday"}>Wednesday</MenuItem>
-                    <MenuItem value={"Thursday"}>Thursday</MenuItem>
-                    <MenuItem value={"Friday"}>Friday</MenuItem>
-                    <MenuItem value={"Saturday"}>Saturday</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth variant="outlined">
-                  <InputLabel id="search-time">Time</InputLabel>
-                  <Select
-                    labelId="search-time"
-                    label="Time"
-                    onChange={handleSelectTime}
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={"8-10"}>8am-10am</MenuItem>
-                    <MenuItem value={"10-12"}>10am-12pm</MenuItem>
-                    <MenuItem value={"12-14"}>12pm-2pm</MenuItem>
-                    <MenuItem value={"14-16"}>2pm-4pm</MenuItem>
-                    <MenuItem value={"16-18"}>4pm-6pm</MenuItem>
-                    <MenuItem value={"18-20"}>6pm-8pm</MenuItem>
-                    <MenuItem value={"20-22"}>8pm-10pm</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <Button type="submit" variant="contained" 
-                  color="primary" fullWidth id="Search" 
-                  onClick={()=>fetch(
-                    "http://localhost:3000/api/searchHistory",{
-                      method:'POST',
-                      headers: {
-                        'Content-Type': 'application/json',
-                      },
-                      body: JSON.stringify({
-                        day:day,
-                        time:time,
-                      }),
-                    }
-                  ).then(function(body){
-				  return body.text()
-				  }
-				  ).then(function(data){
-					alert(data)
-				  })
-				  }
-                  >Search for Occupancy</Button>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Form>
-      )}
-    </Formik>
+	<dev>
+            <h1>
+                <Button className={classes.home_button} variant="contained" color="default">
+                    <Link href="/"> Home </Link>
+                </Button>
+            </h1>
+            <div>
+				<Formik initialValues={{}} onSubmit={()=>{}}>
+				  {({values})=>(
+					<Form>
+					  <Paper elevation={5} className={classes.paper}>
+						<Grid container spacing = {3}>
+						  <Grid item xs={12} sm={6}>
+							<FormControl fullWidth variant="outlined">
+							  <InputLabel id="search-day">Day</InputLabel>
+							  <Select
+								labelId="search-day"
+								label="Day"
+								onChange={handleSelectDay}
+							  >
+								<MenuItem value="">
+								  <em>None</em>
+								</MenuItem>
+								<MenuItem value={"Sunday"}>Sunday</MenuItem>
+								<MenuItem value={"Monday"}>Monday</MenuItem>
+								<MenuItem value={"Tuesday"}>Tuesday</MenuItem>
+								<MenuItem value={"Wednesday"}>Wednesday</MenuItem>
+								<MenuItem value={"Thursday"}>Thursday</MenuItem>
+								<MenuItem value={"Friday"}>Friday</MenuItem>
+								<MenuItem value={"Saturday"}>Saturday</MenuItem>
+							  </Select>
+							</FormControl>
+						  </Grid>
+						  <Grid item xs={12} sm={6}>
+							<FormControl fullWidth variant="outlined">
+							  <InputLabel id="search-time">Time</InputLabel>
+							  <Select
+								labelId="search-time"
+								label="Time"
+								onChange={handleSelectTime}
+							  >
+								<MenuItem value="">
+								  <em>None</em>
+								</MenuItem>
+								<MenuItem value={"8-10"}>8am-10am</MenuItem>
+								<MenuItem value={"10-12"}>10am-12pm</MenuItem>
+								<MenuItem value={"12-14"}>12pm-2pm</MenuItem>
+								<MenuItem value={"14-16"}>2pm-4pm</MenuItem>
+								<MenuItem value={"16-18"}>4pm-6pm</MenuItem>
+								<MenuItem value={"18-20"}>6pm-8pm</MenuItem>
+								<MenuItem value={"20-22"}>8pm-10pm</MenuItem>
+							  </Select>
+							</FormControl>
+						  </Grid>
+						  <Grid item xs={12}>
+							<Button type="submit" variant="contained" 
+							  color="primary" fullWidth id="Search" 
+							  onClick={()=>fetch(
+								"http://localhost:3000/api/searchHistory",{
+								  method:'POST',
+								  headers: {
+									'Content-Type': 'application/json',
+								  },
+								  body: JSON.stringify({
+									day:day,
+									time:time,
+								  }),
+								}
+							  ).then(function(body){
+							  return body.text()
+							  }
+							  ).then(function(data){
+								alert(data)
+							  })
+							  }
+							  >Search for Occupancy</Button>
+						  </Grid>
+						</Grid>
+					  </Paper>
+					</Form>
+				  )}
+				</Formik>
+            </div>
+	</dev>
   );
 }
 
