@@ -121,23 +121,27 @@ async function handler (req, res) {
           //like other's exercise on this treadmill、
           const treadmill_like = await db.collection("Treadmills").findOne(
             {_id : id2}, 
-            { Liked_By:1})
-          let index = treadmill_like.Liked_By.indexOf(nickname)
-          console.log(index)
-          if( index === -1)
-          { //console.log("like")
-            treadmill_like.Liked_By.push(nickname)}
-          else{
-            //cancel like
-            //console.log("cancel like")
-            treadmill_like.Liked_By.splice(index, 1)
+            { Liked_By:1, status: 1})
+          if(treadmill_like.status===0){
+            let index = treadmill_like.Liked_By.indexOf(nickname)
+            console.log(index)
+            if( index === -1)
+            { //console.log("like")
+              treadmill_like.Liked_By.push(nickname)}
+            else{
+              //cancel like
+              //console.log("cancel like")
+              treadmill_like.Liked_By.splice(index, 1)
+            }
+            //console.log(treadmill_like.Liked_By)
+            await db.collection("Treadmills").updateOne(
+              { _id: id2 },
+              { $set: { Liked_By: treadmill_like.Liked_By}}
+            )
+            res.status(200).json({ message: 'Liked exercise!'})
+          } else {
+            res.status(200).json({ message: "No one occupied yet"})
           }
-          //console.log(treadmill_like.Liked_By)
-          await db.collection("Treadmills").updateOne(
-            { _id: id2 },
-            { $set: { Liked_By: treadmill_like.Liked_By}}
-          )
-          res.status(200).json({ message: 'Liked exercise!'})
           // Router.push('/')
           break;
         case "signup":
@@ -177,7 +181,9 @@ async function handler (req, res) {
           //   }
           //   // console.log(user.username, user.password)
           // }
-          res.status(200).json({ message: "did not branch!"})
+          else{
+            res.status(200).json({ message: "User already exist!"})
+          }
           break;
       }
       break;
