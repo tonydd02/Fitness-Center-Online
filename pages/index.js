@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { signIn, signOut, useSession, getSession } from 'next-auth/client'
 import Router from 'next/router'
 import { useRouter, withRouter } from 'next/router'
+//import Image from 'next/image'
 //import Treadmill from '../components/Treadmill'
 // import { handler } from './api/writeToDatabase'
  
@@ -16,7 +17,7 @@ function Treadmill({ treadmill, session }) {
 
     <div>
 
-        <button className={treadmill.status===1 ? "treadmillFree" : "treadmillOccupied"}
+        <button className={treadmill.status===1?"treadmillFree":"treadmillOccupied"}
           onClick={() => fetch ("http://localhost:3000/api/writeToDatabase", {
             method: 'POST', 
             headers: {
@@ -62,7 +63,6 @@ function Treadmill({ treadmill, session }) {
               Router.push(window.location.href)
             })}> <div> Power Up ! </div> 
         </button>
-
         <li className="treadInfo">
         Status: {treadmill.status===1?
         "free":"occupied by ".concat(`${treadmill.who_occupied}`)}</li>
@@ -99,12 +99,20 @@ function Treadmill({ treadmill, session }) {
         .treadmillOccupied:hover {
           background: #ffff00;
         }
+        // .Treadmill_2 {
+        //   background: #99ccff;
+        //   position: absolute;
+        //   margin-top: 100px;
+        //   margin-left: 250px;
+        //   width: 100px;
+        //   height: 60px;
+        // }
         .treadInfo {
           margin-left: 20px;
           color: #0000ff;
         }
         .likeButton {
-          background: #00ff00;
+          background: #FF8000;
           width: 90px;
           height: 30px;
           margin-top: 5px;
@@ -112,7 +120,7 @@ function Treadmill({ treadmill, session }) {
           margin-right: 5px;
         }
         .likeButton:hover {
-          background: #00cc00;
+          background: #FF9933;
         }
       `}</style>
     </div>
@@ -134,7 +142,8 @@ export default function equipments({ data }) {
     <div>
       <h1>
         <div className="UCLA">UCLA</div>
-        <div className="Title"> Treadmills At JWC</div>
+        <div className="Title"> JWC Online </div>
+        <div className="welcome"> Welcome, {session.user.name} </div>
         <button className="rankingButton">
           <Link href="./rank"> Rank </Link>
         </button>
@@ -145,13 +154,16 @@ export default function equipments({ data }) {
           sign out
         </button>
       </h1>
-      <div> Welcome, {session.user.name} </div>
-      <br />
-      <div>
+      
+      <div className="page">
+        {/* <div className="page">
+          <img src="/images/night.jpg" />
+        </div> */}
         {data.map((treadmill) => (
           <Treadmill key={treadmill._id} treadmill={treadmill} session= {session}/>
        ))}
       </div>
+      
       <style jsx>{`
         h1 {
           background: #3399ff;
@@ -206,6 +218,25 @@ export default function equipments({ data }) {
         .UCLA {
           font-style: italic;
           color: #ffff00;
+        }
+        .welcome {
+          position: absolute;
+          top: 30px;
+          right: 280px;
+          font-size: medium;
+        }
+        .IMG {
+          position: absolute;
+          top: 105px;
+          left: 8px;
+          opacity: 0.5;
+        }
+        .page {
+          // background-image: url("/images/outwindow.png");
+          // background-repeat: no-repeat;
+          // height: 1080px;
+          // width: 1400px;
+          // opacity: 0.3;
         }
       `}</style>
     </div>
