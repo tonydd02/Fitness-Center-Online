@@ -21,7 +21,7 @@ async function handler (req, res) {
       );
         if(item!=null){
           const result=item.Usage;
-		  res.status(200).send( `The usage on this day is: ${result}`);
+		  res.status(200).send( `The usage on this day and time is: ${result}`);
           //.log("The usage on this day is: "+result);
         }
         else{
