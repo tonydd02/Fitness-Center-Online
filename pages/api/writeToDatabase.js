@@ -163,7 +163,7 @@ async function handler (req, res) {
                 start_time: new Date(),
                 end_time: new Date(),
                 totalTime: 0,
-                plan: new Set()
+                plan: new Array()
               }
             ) 
             console.log(`Congrats! You have successfully Signed Up!\n \
