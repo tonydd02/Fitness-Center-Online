@@ -7,6 +7,7 @@ import Router from 'next/router'
 import { useRouter, withRouter } from 'next/router'
 import { Card, Button, DropdownButton, Dropdown, ButtonGroup, Form} from "react-bootstrap"
 import styled from 'styled-components'
+import { Button as Butt } from "@material-ui/core"
 
 var day = ""
 var time = ""
@@ -199,7 +200,7 @@ export default function equipments({ data, user }) {
 				  <Link href="./friends"><a className="nav-link">Friends</a></Link>
 				</li>
 				<li className="nav-item active">
-				  <Link href="../signUp/signup"><a className="nav-link">Sign Out</a></Link>
+					<Butt variant="contained" color="primary" onClick={signOut}>Sign Out</Butt>
 				</li>
             </ul>
           </div>
