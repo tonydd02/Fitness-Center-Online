@@ -163,6 +163,7 @@ async function handler (req, res) {
                 start_time: new Date(),
                 end_time: new Date(),
                 totalTime: 0,
+                plan: new Set()
               }
             ) 
             console.log(`Congrats! You have successfully Signed Up!\n \
@@ -184,6 +185,23 @@ async function handler (req, res) {
           else{
             res.status(200).json({ message: "User already exist!"})
           }
+          break;
+        case "add":
+          const plan = body.plan
+          console.log(plan)
+          console.log(body.currentPlan)
+          var currentPlan = body.currentPlan
+          const index = currentPlan.indexOf(plan)
+          if(index===-1 && plan!==" " && plan.length===10){
+            currentPlan.push(plan)
+          } else if (index !== -1 && plan!==" " && plan.length===10){
+            currentPlan.splice(index, 1)
+          }
+          await db.collection("User").updateOne(
+            {nickname: nickname},
+            { $set:{plan: currentPlan}}
+          )
+          res.status(200).json({ message: "added a new exercise plan" })
           break;
       }
       break;
