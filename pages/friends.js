@@ -88,13 +88,11 @@ export default function HomePage(){
             </button>
           <div className={`${isCollapsed? "collapse":""} "navbar-collapse"`} id="navbarResponsive">
             <ul className="navbar-nav ml-auto">
-				<li className="nav-item">
-				  <Link href="#"><a className="nav-link">Sign In
-					</a>
-				  </Link>
-				</li>
 				<li className="nav-item active">
 				  <Link href="../signUp/signup"><a className="nav-link">Sign Up</a></Link>
+				</li>
+				<li className="nav-item">
+				  <Butt variant="contained" color="primary" onClick={signIn}>Sign In</Butt>
 				</li>
             </ul>
           </div>
