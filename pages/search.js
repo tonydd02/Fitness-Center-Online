@@ -4,7 +4,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Link from 'next/link'
 import 'bootstrap/dist/css/bootstrap.css'
 import { useState } from 'react'
-
+import { signIn, signOut, useSession, getSession } from 'next-auth/client';
 
 
 var day=0;
@@ -72,8 +72,10 @@ const handleSelectTime = (event) => {
 export default function Home(){
   const [isCollapsed, setIsCollapsed] = useState(false);
   const handleCollapse = () => setIsCollapsed(!isCollapsed);
+  const [ session, loading ] = useSession()
   const classes=useStyles();
   return (
+	session ? (
     <div className="body">
       <>
         <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-secondary">
@@ -100,7 +102,7 @@ export default function Home(){
 				  <Link href="./friends"><a className="nav-link">Friends</a></Link>
 				</li>
 				<li className="nav-item active">
-				  <Link href="../signUp/signup"><a className="nav-link">Sign Out</a></Link>
+					<Button variant="contained" color="primary" onClick={signOut}>Sign Out</Button>
 				</li>
             </ul>
           </div>
@@ -204,7 +206,91 @@ export default function Home(){
               }`
             }
         </style>
+    </div>):(
+			<div className="body">
+        <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-secondary">
+          <div className="container">
+          <a className="navbar-brand" href="#"><img className="logo" src="/images/treadmills.png" alt="Treadmills at JWC"/></a>
+          <button className="navbar-toggler" type="button" data-toggle="collapse"
+          data-target="#navbarResponsive" aria-controls="navbarResponsive"  aria-expanded={!isCollapsed ? true : false} aria-label="Toggle navigation" onClick={handleCollapse}>
+              <span className="navbar-toggler-icon"></span>
+            </button>
+          <div className={`${isCollapsed? "collapse":""} "navbar-collapse"`} id="navbarResponsive">
+            <ul className="navbar-nav ml-auto">
+				<li className="nav-item">
+				  <Link href="#"><a className="nav-link">Sign In
+					</a>
+				  </Link>
+				</li>
+				<li className="nav-item active">
+				  <Link href="../signUp/signup"><a className="nav-link">Sign Up</a></Link>
+				</li>
+            </ul>
+          </div>
+          </div>
+        </nav>
+        <div className="head">
+        </div>
+        <div className="container">
+          <div className="card border-0 shadow my-5">
+            <div className="card-body p-5">
+			  <p>You are not permitted to see this page. Please Sign in or Sign up...</p>
+			  <button className="signin" onClick={signIn} > <p className="text">Sign in</p></button>
+			  <button className="signUp" onClick={() => {Router.push("./signUp/signup")}}>
+				{/* <Link href="./signUp/signup"> */}
+				<p className="text">
+				  Sign up
+				</p>
+				{/* </Link> */}
+			  </button>
+            </div>
+          </div>
+        </div>
+        <div className="blank">
+        </div>
+        <style jsx>{`
+			.logo{
+			height: 70px;
+			}
+			.body{
+			background: url(/images/JWC.jpg) repeat center center fixed;
+			background-size: cover;
+			}
+			.head{
+			height: 80px;
+			visibility: hidden;
+			}
+			.blank{
+			height: 300px;
+			visibility: hidden;
+              }
+			.signUp {
+				margin-left: 20px;
+				background-color: #2389EF;
+				border: none;
+				height: 35px;
+				width 100px;
+			}
+			.signUp:hover {
+				background-color: #318AE2;
+			}
+			.signin {
+				margin-left: 10px;
+				background-color: #2389EF;
+				border: none;
+				height: 35px;
+				width: 100px;
+			}
+			.signin:hover {
+				background-color: #318AE2;
+			}
+			p {
+				color: #00000
+			}`
+            }
+        </style>
     </div>
+	)
   );
 }
 
