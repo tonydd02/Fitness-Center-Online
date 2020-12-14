@@ -2,7 +2,31 @@
   "./dev/noop": [
     {
       "id": "./node_modules/next/dist/client/dev/noop.js",
+      "file": "static/chunks/1.js"
+    }
+  ],
+  "bootstrap": [
+    {
+      "id": "../../../node_modules/bootstrap/dist/js/bootstrap.js",
       "file": "static/chunks/0.js"
+    },
+    {
+      "id": "../../../node_modules/jquery/dist/jquery.js",
+      "file": "static/chunks/0.js"
+    },
+    {
+      "id": "../../../node_modules/popper.js/dist/esm/popper.js",
+      "file": "static/chunks/0.js"
+    },
+    {
+      "id": "./node_modules/webpack/buildin/global.js",
+      "file": "static/chunks/0.js"
+    }
+  ],
+  "jquery": [
+    {
+      "id": "../../../node_modules/jquery/dist/jquery.js",
+      "file": "static/chunks/2.js"
     }
   ]
 }

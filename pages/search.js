@@ -2,6 +2,8 @@ import { Button, FormControl, Grid, InputLabel, makeStyles, MenuItem, Paper, Sel
 import { Field, Form, Formik, useField, useFormikContext } from 'formik';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Link from 'next/link'
+import 'bootstrap/dist/css/bootstrap.css'
+import { useState } from 'react'
 
 
 
@@ -14,11 +16,6 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 400,
     padding: theme.spacing(3)
   },
-  home_button:{
-    position: "absolute",
-	left: "90%",
-	top: "2%"
-  }
 }));
 
 async function handleClick(){
@@ -73,16 +70,45 @@ const handleSelectTime = (event) => {
 }
 
 export default function Home(){
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const handleCollapse = () => setIsCollapsed(!isCollapsed);
   const classes=useStyles();
   return (
-	<dev>
-            <h1>
-                <Button className={classes.home_button} variant="contained" color="default">
-                    <Link href="/"> Home </Link>
-                </Button>
-            </h1>
-            <div>
-				<Formik initialValues={{}} onSubmit={()=>{}}>
+    <div className="body">
+      <>
+        <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-secondary">
+          <div className="container">
+          <a className="navbar-brand" href="../"><img className="logo" src="https://scontent-lax3-1.xx.fbcdn.net/v/t1.0-9/131332214_385203949381880_8224267459901597667_n.jpg?_nc_cat=104&ccb=2&_nc_sid=730e14&_nc_ohc=AQyHzYI9HAkAX-x7eVJ&_nc_ht=scontent-lax3-1.xx&oh=1c4533dfa5d6745e11084bae57dc4464&oe=5FFA7BE4" alt="Treadmills at JWC"/></a>
+          <button className="navbar-toggler" type="button" data-toggle="collapse"
+          data-target="#navbarResponsive" aria-controls="navbarResponsive"  aria-expanded={!isCollapsed ? true : false} aria-label="Toggle navigation" onClick={handleCollapse}>
+              <span className="navbar-toggler-icon"></span>
+            </button>
+          <div className={`${isCollapsed? "collapse":""} "navbar-collapse"`} id="navbarResponsive">
+            <ul className="navbar-nav ml-auto">
+				<li className="nav-item">
+				  <Link href="./rank"><a className="nav-link">Rank
+					</a>
+				  </Link>
+				</li>
+				<li className="nav-item">
+				  <Link href="./search">
+					<a className="nav-link">Search
+					</a>
+				  </Link>
+				</li>
+				<li className="nav-item">
+				  <Link href="./friends"><a className="nav-link">Friends</a></Link>
+				</li>
+				<li className="nav-item active">
+				  <Link href="../signUp/signup"><a className="nav-link">Sign Out</a></Link>
+				</li>
+            </ul>
+          </div>
+          </div>
+        </nav>
+        <div className="head">
+        </div>
+        <Formik initialValues={{}} onSubmit={()=>{}}>
 				  {({values})=>(
 					<Form>
 					  <Paper elevation={5} className={classes.paper}>
@@ -157,8 +183,28 @@ export default function Home(){
 					</Form>
 				  )}
 				</Formik>
-            </div>
-	</dev>
+        <div className="blank">
+        </div>
+        </>
+        <style jsx>{`
+              .logo{
+                height: 70px;
+              }
+              .body{
+                background: url(https://scontent-lax3-2.xx.fbcdn.net/v/t1.0-9/130220227_384431162792492_8983059439161377899_o.jpg?_nc_cat=106&ccb=2&_nc_sid=730e14&_nc_ohc=yViejv2y34sAX_pj0He&_nc_ht=scontent-lax3-2.xx&oh=204583bd60d5b5fffc95cdf3c3bcaa4d&oe=5FFC29B7) repeat center center fixed;
+                background-size: cover;
+              }
+              .head{
+                height: 150px;
+                visibility: hidden;
+              }
+              .blank{
+                height: 350px;
+                visibility: hidden;
+              }`
+            }
+        </style>
+    </div>
   );
 }
 
