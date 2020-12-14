@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { signIn, signOut, useSession, getSession } from 'next-auth/client'
 import { Button as Butt } from "@material-ui/core"
+import Router from 'next/router'
 
 export default function HomePage(){
   const [isCollapsed, setIsCollapsed] = useState(false);
