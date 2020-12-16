@@ -62,6 +62,19 @@ function Treadmill({ treadmill, session }) {
                 }).then(() => {
                   console.log("loading...")
                   Router.push(window.location.href)
+                  switch(treadmill.error)
+                  {
+                  case 1:
+                    window.alert("You cannot occupy two machines at the same time!")
+                    break
+                  case 2:
+                    window.alert("This machine is currently occupied by others!")
+                    break
+                  case 3:
+                    window.alert("There is some internal errors, please contact developer!")
+                    break
+                  default:
+                  }
                 })}>
               <div> {treadmill.name} </div>
             </Button>

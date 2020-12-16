@@ -53,6 +53,9 @@ async function handler (req, res) {
               end_time: 1,
               totalTime: 1,
             })
+          await db.collection("Treadmills").updateOne(
+            { _id: id },
+            { $set: { error: 0}})
           const user_occupy = await db.collection("User").findOne(
             { nickname: nickname },
             { start_time: 1 ,
@@ -104,6 +107,20 @@ async function handler (req, res) {
             }
             else
             {
+              if (user_occupy.has_occupied === 1){
+                await db.collection("Treadmills").updateOne(
+                  { _id: id },
+                  { $set: { error: 1}})}
+              else if(treadmill.who_occupied !== nickname){
+                await db.collection("Treadmills").updateOne(
+                  { _id: id },
+                  { $set: { error: 2}})
+              }
+              else{
+                await db.collection("Treadmills").updateOne(
+                  { _id: id },
+                  { $set: { error: 3}})
+              }
               //res.statusMessage = "This machine has already been occupied by others";
               //res.status(317).end()
               console.log("I am in branch that will alert")
