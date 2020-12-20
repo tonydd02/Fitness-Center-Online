@@ -186,7 +186,8 @@ async function handler (req, res) {
                 start_time: new Date(),
                 end_time: new Date(),
                 totalTime: 0,
-                plan: new Array()
+                plan: new Array(),
+				has_occupied: 0
               }
             ) 
             console.log(`Congrats! You have successfully Signed Up!\n \
