@@ -77,6 +77,7 @@ async function handler (req, res) {
                 { nickname: nickname },
                 { $set: { start_time : start, has_occupied: 1}},
                 console.log(`start time: ${user.start_time}`))
+                res.status(200).send("equipment occupied")
             }
           else{ 
             if (treadmill.who_occupied === nickname && user_occupy.has_occupied === 1)
@@ -104,22 +105,27 @@ async function handler (req, res) {
                 //console.log(`start time: ${user.start_time}`),
                 //console.log(`end time: ${user.end_time}`)
               )
+              res.status(200).send("finished exercise !")
             }
             else
             {
               if (user_occupy.has_occupied === 1){
-                await db.collection("Treadmills").updateOne(
-                  { _id: id },
-                  { $set: { error: 1}})}
+                // await db.collection("Treadmills").updateOne(
+                //   { _id: id },
+                //   { $set: { error: 1}})}
+                res.status(200).send("You cannot occupy two equipments at the same time!");
+              }
               else if(treadmill.who_occupied !== nickname){
-                await db.collection("Treadmills").updateOne(
-                  { _id: id },
-                  { $set: { error: 2}})
+                // await db.collection("Treadmills").updateOne(
+                //   { _id: id },
+                //   { $set: { error: 2}})
+                res.status(200).send("This machine is currently occupied by others!");
               }
               else{
-                await db.collection("Treadmills").updateOne(
-                  { _id: id },
-                  { $set: { error: 3}})
+                // await db.collection("Treadmills").updateOne(
+                //   { _id: id },
+                //   { $set: { error: 3}})
+                res.status(200).send("There is some internal errors, please contact developer!")
               }
               //res.statusMessage = "This machine has already been occupied by others";
               //res.status(317).end()
@@ -129,7 +135,7 @@ async function handler (req, res) {
             }
           }
           //console.log("I exited the branch and return 200")
-          res.status(200).json({ message: "equipment occupied"})
+          
           // Router.push('/')
           break;
         case "like":
@@ -155,9 +161,9 @@ async function handler (req, res) {
               { _id: id2 },
               { $set: { Liked_By: treadmill_like.Liked_By}}
             )
-            res.status(200).json({ message: 'Liked exercise!'})
+            res.status(200).send('Liked exercise!')
           } else {
-            res.status(200).json({ message: "No one occupied yet"})
+            res.status(200).send("No one occupied yet")
           }
           // Router.push('/')
           break;
@@ -187,7 +193,7 @@ async function handler (req, res) {
                       Your Username is ${name}\n \
                       Your Password is ${password}\n
                       Your Nickname is ${nickname}...`)
-            res.status(200).json({ message: "created one"})
+            res.status(200).send("created one")
             
           } 
           // else {
@@ -200,7 +206,7 @@ async function handler (req, res) {
           //   // console.log(user.username, user.password)
           // }
           else{
-            res.status(200).json({ message: "User already exist!"})
+            res.status(200).send("User already exist!")
           }
           break;
         case "add":
@@ -218,7 +224,7 @@ async function handler (req, res) {
             {nickname: nickname},
             { $set:{plan: currentPlan}}
           )
-          res.status(200).json({ message: "added a new exercise plan" })
+          res.status(200).send("added a new exercise plan" )
           break;
       }
       break;
