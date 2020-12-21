@@ -62,7 +62,7 @@ npm run dev
 
 Here is the link to the [presentation](https://drive.google.com/file/d/1VQEjpNIQ7rSNTGJyaNXzEON4oAEoe8ID/view?usp=sharing) video.
 
-Because we added some new features and stylings after presentation, we also have a [demo] of our current app.
+Because we added some new features and stylings after presentation, we also have a demo of our current app.
 
 1. Directing to Sign In/Sign up:
 <img width="981" alt="Screen Shot 2020-12-21 at 9 48 12 AM" src="https://user-images.githubusercontent.com/57846897/102731645-59185900-4373-11eb-9d51-a95aa0de2b7f.png">
