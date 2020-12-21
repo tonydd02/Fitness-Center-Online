@@ -1,11 +1,11 @@
 # Bring JWC Online
 
-Table of Contents
-    *[introduction](#Introduction)
-    *[Tech](#Tech)
-    *[Install](#Install)
-    *[How_to_use](#Guide)
-    *[Video demo](#Demo)
+Table of contents
+  * [Introduction](#Introduction)
+  * [Tech](#Tech)
+  * [Install](#Install)
+  * [How_to_use](#Guide)
+  * [Demo](#Demo)
 
 ## Introduction
 
