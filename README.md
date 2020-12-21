@@ -1,30 +1,93 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Bring JWC Online
 
-## Getting Started
+Table of Contents
+    *[introduction](#Introduction)
+    *[Tech](#Tech)
+    *[Install](#Install)
+    *[How_to_use](#Guide)
+    *[Video demo](#Demo)
 
-First, run the development server:
+## Introduction
 
-```bash
-npm run dev
-# or
-yarn dev
+Project Motivation
+The online printer and scanner monitoring system in UCLA Mobile app gives us inspiration to build an online monitoring web app for Bfit and JWC. It's a common scene in JWC/Bfit that students have to wait for free equipment to get exercise during overflow hours. Our webapp could save time for users if they can monitor the real-time occupation situation of JWC and Bfit. As a side effect, it could also help JWC and Bfit to mitigate working burden at busy hours. Moreover, future application of this web app is to control user density in JWC/Bfit at post Covid-19 period when the risk of infection still fluctuates.
+
+Features:
+- Dynamic display of treadmill availability
+- Occupy equipment and sync to database
+- Search for historical data for specific time slot
+- Planning your exercise
+- Recording user exercising time and ranking (We are planning to add
+  friend system to deal with privacy issues)
+
+## Tech
+
+Both the client side and server side are written in Nextjs.
+We used Mongodb as database.
+
+## Install
+
+You can follow these easy steps to run the all locally
+
+1. Clone this Repository by running the following command in terminal
+```shell
+git clone [URL to this repo]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Cd into this repository
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+3. Run the following command to install dependencies (assuming have Node.js installed)
+```shell
+npm install
+```
 
-## Learn More
+4. Start the application
+```shell
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+5. Open [http://localhost:3000](http://localhost:3000) using a browser of your choice
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Guide
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Sign up and Sign in
+2. You can occupy empty treadmill/unoccupy treadmills you occupied
+3. Like others exercise/click again to unlike
+4. Plan your weeky exercis
+5. In the top menu
+    - Check your ranking
+    - Search for historical availability data
 
-## Deploy on Vercel
+## Demo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Here is the link to the [presentation](https://drive.google.com/file/d/1VQEjpNIQ7rSNTGJyaNXzEON4oAEoe8ID/view?usp=sharing) video.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Because we added some new features and stylings after presentation, we also have a [demo] of our current app.
+
+1. Directing to Sign In/Sign up:
+<img width="981" alt="Screen Shot 2020-12-21 at 9 48 12 AM" src="https://user-images.githubusercontent.com/57846897/102731645-59185900-4373-11eb-9d51-a95aa0de2b7f.png">
+<img width="980" alt="Screen Shot 2020-12-21 at 9 48 36 AM" src="https://user-images.githubusercontent.com/57846897/102731691-79e0ae80-4373-11eb-88fb-6458156f3b7c.png">
+<img width="978" alt="Screen Shot 2020-12-21 at 9 48 57 AM" src="https://user-images.githubusercontent.com/57846897/102731724-89f88e00-4373-11eb-90b0-284550d98a98.png">
+
+2. Sign in/Sign up page:
+<img width="979" alt="Screen Shot 2020-12-21 at 9 49 34 AM" src="https://user-images.githubusercontent.com/57846897/102731812-d04ded00-4373-11eb-9b84-7d598c843305.png">
+<img width="508" alt="Screen Shot 2020-12-21 at 9 49 48 AM" src="https://user-images.githubusercontent.com/57846897/102731843-e8be0780-4373-11eb-983d-aa4587b566d2.png">
+
+3. Homepage: 
+<img width="977" alt="Screen Shot 2020-12-21 at 9 50 04 AM" src="https://user-images.githubusercontent.com/57846897/102731893-173be280-4374-11eb-965f-08e5a412e8fb.png">
+
+Attempts to occupy more than one treadmill or occupied treadmills will result in an alert.
+User can only like occupied treadmills, namely ongoing exercises. Once a treadmill is unoccupied, the likes will be reset.
+
+4. Rank page:
+<img width="977" alt="Screen Shot 2020-12-21 at 9 50 23 AM" src="https://user-images.githubusercontent.com/57846897/102731924-333f8400-4374-11eb-9caf-215bc720f15c.png">
+
+5. Search page:
+<img width="978" alt="Screen Shot 2020-12-21 at 9 50 43 AM" src="https://user-images.githubusercontent.com/57846897/102731981-55390680-4374-11eb-975e-9662e6da1050.png">
+
+User needs to select both day and time to do a search. Otherwise, an alert will tell user to select both. 
+If our database is missing usage information for a specific time, an alert will tell user that the equipment availability being searched is currently unavailable (which we expect users to never see this).
+The result of search will be an alert message containing the equipment usage on that day and time.
+
+Rk: User can sign out on each page and signing in would direct user back to the page that they were signed out from.
+The friends link in the navigation bar is just a link to a dummy version of friend feature which we did not implemented as part of this project. This feature might be finished in the future.
